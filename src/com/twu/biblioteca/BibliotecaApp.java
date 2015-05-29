@@ -31,6 +31,9 @@ public class BibliotecaApp
         case "C":
         checkOutBooks(br);
         break;
+        case "R":
+        returnBackBooks(br);
+        break;
         case "Q":
         break;
         default:
@@ -41,6 +44,39 @@ public class BibliotecaApp
     {
       e.printStackTrace();
     }
+  }
+  public static void returnBackBooks(BufferedReader br)
+  {
+    System.out.println("please input the number of the book taht you want to return!");
+    try
+    {
+      String option = br.readLine();
+      if(option != "Q")
+      {
+        if(!(option != null && Integer.parseInt(option) <= totalBookNumber))
+        {
+          System.out.println("please input the right number");
+
+        }
+        else
+        {
+          if(check[Integer.parseInt(option)] == false)
+          {
+            System.out.println("This is not a valid book to return");
+
+          }
+          else
+          {
+            check[Integer.parseInt(option)] = false;
+            System.out.println("Thank you for returning the book");
+          }
+        }
+      }
+    }catch(IOException e)
+    {
+      e.printStackTrace();
+    }
+    mainMenu();
   }
   public static void checkOutBooks(BufferedReader br)
   {
@@ -53,14 +89,14 @@ public class BibliotecaApp
         if(!(option != null && Integer.parseInt(option) <= totalBookNumber))
         {
           System.out.println("please input the right number");
-          return;
+
         }
         else
         {
           if(check[Integer.parseInt(option)] == true)
           {
-            System.out.println("the book has been checked");
-            return;
+            System.out.println("That book is not available");
+
           }
           else
           {
@@ -79,7 +115,8 @@ public class BibliotecaApp
   {
     System.out.print("[L]listBooks    ");
     System.out.print("[Q]quit    ");
-    System.out.print("[C]checkBooks    ");
+    System.out.print("[C]checkOutBooks    ");
+    System.out.print("[R]returnBackBooks    ");
     System.out.println("");
     chooseTheOption();
 
