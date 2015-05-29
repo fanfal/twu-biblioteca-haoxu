@@ -4,9 +4,16 @@ import java.io.BufferedReader;
 import java.io.IOException;
 public class BibliotecaApp
 {
+  static int totalBookNumber = 3;
+  static String[] name = new String[3];
+  static String[] author = new String[3];
+  static int[] year  = new int[3];
+  static boolean[] check = new boolean[3];
+
   public static void main(String[] args)
   {
     System.out.println("Welcome to the Bangalore Public Library!");
+    dateBaseInit();
     mainMenu();
 
   }
@@ -19,35 +26,94 @@ public class BibliotecaApp
       switch(option)
       {
         case "L":
-        bookDatebase();
+        printDatebase();
+        break;
+        case "C":
+        checkOutBooks(br);
         break;
         case "Q":
-        mainMenu();
+        break;
         default:
         System.out.println("Select a valid option");
+        chooseTheOption();
       }
     }catch(IOException e)
     {
       e.printStackTrace();
     }
   }
+  public static void checkOutBooks(BufferedReader br)
+  {
+    System.out.println("please input the number of the book taht you want to checkout!");
+    try
+    {
+      String option = br.readLine();
+      if(option != "Q")
+      {
+        if(!(option != null && Integer.parseInt(option) <= totalBookNumber))
+        {
+          System.out.println("please input the right number");
+          return;
+        }
+        else
+        {
+          if(check[Integer.parseInt(option)] == true)
+          {
+            System.out.println("the book has been checked");
+            return;
+          }
+          else
+          {
+            check[Integer.parseInt(option)] = true;
+            System.out.println("Thank you! Enjoy the book");
+          }
+        }
+      }
+    }catch(IOException e)
+    {
+      e.printStackTrace();
+    }
+    mainMenu();
+  }
   public static void mainMenu()
   {
     System.out.print("[L]listBooks    ");
     System.out.print("[Q]quit    ");
+    System.out.print("[C]checkBooks    ");
     System.out.println("");
     chooseTheOption();
 
   }
-  public static void bookDatebase()
+  public static void dateBaseInit()
   {
-    listBooks("老人与海","海明威",1951);
-    listBooks("简爱","夏洛蒂～勃朗特",1847);
-    listBooks("战争与和平","列夫～托尔斯泰",1965);
+    name[0] = "老人与海";
+    name[1] = "简爱";
+    name[2] = "战争与和平";
+    author[0] = "海明威";
+    author[1] = "夏洛蒂～勃朗特";
+    author[2] = "列夫～托尔斯泰";
+    year[0] = 1951;
+    year[1] = 1847;
+    year[2] = 1965;
+    check[0] = false;
+    check[1] = false;
+    check[2] = false;
+  }
+  public static void printDatebase()
+  {
+    for(int i=0;i<3;i++)
+    {
+      if(check[i] == false)
+      {
+        listBooks(i,name[i],author[i],1951);
+      }
+
+    }
     mainMenu();
   }
-  public static void listBooks(String name,String author,int year)
+  public static void listBooks(int bookNumber,String name,String author,int year)
   {
-    System.out.println("Name:" + name + "     Author:" + author + "     Year:"+year);
+    System.out.println("BookNumber:" + bookNumber+"    Name:" + name + "     Author:"
+     + author + "     Year:"+year);
   }
 }
