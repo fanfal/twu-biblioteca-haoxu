@@ -20,22 +20,31 @@ public class BibliotecaApp
   public static void chooseTheOption()
   {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    Movies movie = new Movies();
     try
     {
       String option = br.readLine();
       switch(option)
       {
-        case "L":
-        printDatebase();
-        break;
-        case "C":
-        checkOutBooks(br);
-        break;
-        case "R":
-        returnBackBooks(br);
-        break;
+        case "BL":
+          printDatebase();
+          break;
+        case "BC":
+          checkOutBooks(br);
+          break;
+        case "BR":
+          returnBackBooks(br);
+          break;
+        case "ML":
+          movie.printMovieList();
+          mainMenu();
+          break;
+        case "MC":
+          movie.movieCheckOut(br);
+          mainMenu();
+          break;
         case "Q":
-        break;
+          break;
         default:
         System.out.println("Select a valid option");
         chooseTheOption();
@@ -47,13 +56,13 @@ public class BibliotecaApp
   }
   public static void returnBackBooks(BufferedReader br)
   {
-    System.out.println("please input the number of the book taht you want to return!");
+    System.out.println("please input the number of the book that you want to return!");
     try
     {
       String option = br.readLine();
       if(option != "Q")
       {
-        if(!(option != null && Integer.parseInt(option) <= totalBookNumber))
+        if(!(option != null && Integer.parseInt(option) < totalBookNumber))
         {
           System.out.println("please input the right number");
 
@@ -80,7 +89,7 @@ public class BibliotecaApp
   }
   public static void checkOutBooks(BufferedReader br)
   {
-    System.out.println("please input the number of the book taht you want to checkout!");
+    System.out.println("please input the number of the book that you want to checkout!");
     try
     {
       String option = br.readLine();
@@ -113,10 +122,12 @@ public class BibliotecaApp
   }
   public static void mainMenu()
   {
-    System.out.print("[L]listBooks    ");
+    System.out.print("[BL]listBooks    ");
+    System.out.print("[BC]checkOutBooks    ");
+    System.out.print("[BR]returnBackBooks    ");
+    System.out.print("[ML]listMovies    ");
+    System.out.print("[MC]checkOutMovies    ");
     System.out.print("[Q]quit    ");
-    System.out.print("[C]checkOutBooks    ");
-    System.out.print("[R]returnBackBooks    ");
     System.out.println("");
     chooseTheOption();
 
