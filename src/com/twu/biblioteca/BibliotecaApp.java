@@ -6,6 +6,7 @@ public class BibliotecaApp
 {
   static Movies movie = new Movies();
   static Books  book = new Books();
+  static Login  login = new Login();
   public static void main(String[] args)
   {
     System.out.println("Welcome to the Bangalore Public Library!");
@@ -23,15 +24,15 @@ public class BibliotecaApp
       {
         case "BL":
           book.listBooks();
-          chooseTheOption();
+          mainMenu();
           break;
         case "BC":
           book.checkOutBooks(br);
-          chooseTheOption();
+          mainMenu();
           break;
         case "BR":
           book.returnBackBooks(br);
-          chooseTheOption();
+          mainMenu();
           break;
         case "ML":
           movie.printMovieList();
@@ -39,6 +40,14 @@ public class BibliotecaApp
           break;
         case "MC":
           movie.movieCheckOut(br);
+          mainMenu();
+          break;
+        case "LI":
+          login.userLogin();
+          mainMenu();
+          break;
+        case "CI":
+          login.showPersonalImformation();
           mainMenu();
           break;
         case "Q":
@@ -56,6 +65,8 @@ public class BibliotecaApp
 
   public static void mainMenu()
   {
+    System.out.print("[LI]login    ");
+    System.out.print("[CI]checkPersonalInformation    ");
     System.out.print("[BL]listBooks    ");
     System.out.print("[BC]checkOutBooks    ");
     System.out.print("[BR]returnBackBooks    ");
